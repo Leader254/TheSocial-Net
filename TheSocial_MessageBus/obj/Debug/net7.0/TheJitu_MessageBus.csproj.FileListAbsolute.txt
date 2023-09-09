@@ -1,0 +1,12 @@
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\bin\Debug\net7.0\TheJitu_MessageBus.deps.json
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\bin\Debug\net7.0\TheJitu_MessageBus.dll
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\bin\Debug\net7.0\TheJitu_MessageBus.pdb
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\TheJitu_MessageBus.csproj.AssemblyReference.cache
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\TheJitu_MessageBus.GeneratedMSBuildEditorConfig.editorconfig
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\TheJitu_MessageBus.AssemblyInfoInputs.cache
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\TheJitu_MessageBus.AssemblyInfo.cs
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\TheJitu_MessageBus.csproj.CoreCompileInputs.cache
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\TheJitu_MessageBus.dll
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\refint\TheJitu_MessageBus.dll
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\TheJitu_MessageBus.pdb
+D:\Training\C# .NET Training\MicroServices\Microservice-Architecture-master\TheJitu_MessageBus\obj\Debug\net7.0\ref\TheJitu_MessageBus.dll
