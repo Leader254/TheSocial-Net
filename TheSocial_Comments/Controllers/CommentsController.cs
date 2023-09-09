@@ -74,40 +74,44 @@ namespace TheSocial_Comments.Controllers
             return BadRequest(_response);
         }
 
-        // delete comment and the ownership of the comment
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseDto>> DeleteComment(Guid id)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ResponseDto>> DeleteComment(Guid commentId)
         {
-            var owner = User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
-            var comment = await _commentInterface.GetCommentByIdAsync(id);
-
-            if (comment != null && owner == comment.UserId.ToString())
+            var comment = await _commentInterface.GetCommentByIdAsync(commentId);
+            if (comment != null)
             {
                 var response = await _commentInterface.DeleteCommentAsync(comment);
                 if (response != null)
                 {
                     _response.IsSuccess = true;
-                    _response.Message = response;
+                    _response.Message = "Successfully deleted";
                     return Ok(_response);
                 }
-
                 _response.IsSuccess = false;
                 _response.Message = "Something went wrong";
                 return BadRequest(_response);
             }
-
             _response.IsSuccess = false;
-            _response.Message = "You are not authorized to delete this comment";
+            _response.Message = "Comment not found";
             return BadRequest(_response);
         }
 
 
-        // update comment
+        // update comment by id
         [HttpPut]
-        public async Task<ActionResult<ResponseDto>> UpdateComment(CommentRequestDto commentRequestDto)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ResponseDto>> UpdateComment(Guid id, CommentRequestDto commentRequestDto)
         {
-            var comment = _mapper.Map<Comment>(commentRequestDto);
-            var response = await _commentInterface.UpdateCommentAsync(comment);
+            var comment = await _commentInterface.GetCommentByIdAsync(id);
+            if (comment == null)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Comment not found";
+                return BadRequest(_response);
+            }
+            var updatedComment = _mapper.Map(commentRequestDto, comment);
+            var response = await _commentInterface.UpdateCommentAsync(updatedComment);
             if (response != null)
             {
                 _response.IsSuccess = true;
@@ -117,6 +121,8 @@ namespace TheSocial_Comments.Controllers
             _response.IsSuccess = false;
             _response.Message = "Something went wrong";
             return BadRequest(_response);
+
+
         }
         // get all comments by post id
         [HttpGet("GetAllCommentsByPostId/{id}")]

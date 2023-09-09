@@ -42,7 +42,6 @@ namespace TheSocial_Comments.Services
         {
             return await _context.Comments.Where(x => x.PostId == postId).ToListAsync();
         }
-
         public async Task<string> UpdateCommentAsync(Comment comment)
         {
             _context.Comments.Update(comment);

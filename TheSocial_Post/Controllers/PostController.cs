@@ -27,7 +27,6 @@ namespace TheSocial_Post.Controllers
             _response = new ResponseDto();
         }
         [HttpPost]
-
         public async Task<ActionResult<ResponseDto>> CreatePost(PostRequestDto postRequestDto)
         {
             var newPost = _mapper.Map<Post>(postRequestDto);
@@ -97,35 +96,29 @@ namespace TheSocial_Post.Controllers
         //     return BadRequest(_response);
         // }
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResponseDto>> DeletePost(Guid id)
         {
-            // check Admin role
-            var isAdmin = User.Claims.FirstOrDefault(c => c.Type == "Role").Value;
-            if (!string.IsNullOrEmpty(isAdmin) && isAdmin == "Admin")
+            var post = await _postService.GetPostByIdAsync(id);
+            if (post != null)
             {
-                var post = await _postService.GetPostByIdAsync(id);
-                if (post != null)
+                var response = await _postService.DeletePostAsync(post);
+                if (response != null)
                 {
-                    var response = await _postService.DeletePostAsync(post);
-                    if (response != null)
-                    {
-                        _response.IsSuccess = true;
-                        _response.Message = "Successfully deleted";
-                        return Ok(_response);
-                    }
-                    _response.IsSuccess = false;
-                    _response.Message = "Something went wrong";
-                    return BadRequest(_response);
+                    _response.IsSuccess = true;
+                    _response.Message = "Successfully deleted";
+                    return Ok(_response);
                 }
                 _response.IsSuccess = false;
-                _response.Message = "Post not found";
+                _response.Message = "Something went wrong";
                 return BadRequest(_response);
             }
             _response.IsSuccess = false;
-            _response.Message = "You are not authorized to perform this action";
+            _response.Message = "Post not found";
             return BadRequest(_response);
+
         }
+
         //get all posts by user id
         [HttpGet("userId")]
         public async Task<ActionResult<ResponseDto>> GetAllPostsByUserId(Guid userId)
@@ -143,6 +136,7 @@ namespace TheSocial_Post.Controllers
             return BadRequest(_response);
         }
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResponseDto>> UpdatePost(Guid id, PostRequestDto postRequestDto)
         {
             var post = await _postService.GetPostByIdAsync(id);
