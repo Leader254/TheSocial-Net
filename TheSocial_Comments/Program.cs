@@ -21,7 +21,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ICommentsInterface, CommentService>();
-
+builder.AddSwaggenGenExtension();
+builder.AddAppAuthentication();
 
 var app = builder.Build();
 
@@ -33,6 +34,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMigration();
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

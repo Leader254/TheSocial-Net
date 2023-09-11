@@ -13,6 +13,7 @@ namespace TheSocial_Post.Profiles
         public PostsProfile()
         {
             CreateMap<PostRequestDto, Post>().ReverseMap();
+            CreateMap<Post, PostDto>().ReverseMap();
         }
     }
 }

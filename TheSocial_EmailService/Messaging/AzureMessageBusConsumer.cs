@@ -18,7 +18,6 @@ namespace TheSocial_EmailService.Messaging
             _configuration = configuration;
             ConnectionString = _configuration.GetSection("ServiceBus:ConnectionString").Get<string>();
             QueueName = _configuration.GetSection("QueuesandTopic:RegisterUser").Get<string>();
-            //_serviceProcessor = new ServiceBusClient(ConnectionString).CreateProcessor(QueueName, new ServiceBusProcessorOptions());
             var serviceBusClient = new ServiceBusClient(ConnectionString);
             _serviceProcessor = serviceBusClient.CreateProcessor(QueueName);
             _sendMailService = new SendMailService();

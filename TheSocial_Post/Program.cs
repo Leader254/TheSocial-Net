@@ -4,8 +4,10 @@ using TheSocial_Post.Extension;
 using TheSocial_Post.Extensions;
 using TheSocial_Post.Services;
 using TheSocial_Post.Services.IService;
+using TheSocial_Post.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
 
@@ -20,12 +22,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Register Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-// registering the base url for the client app
-builder.Services.AddHttpClient("Comment", c=>c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CommentApi"]));
+builder.Services.AddScoped<Util>();
 builder.Services.AddScoped<ICommentInterface, CommentsService>();
 
 builder.Services.AddScoped<IPostService, PostService>();
+// registering the base url for the client app
+builder.Services.AddHttpClient("Comments", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CommentApi"])).AddHttpMessageHandler<Util>();
+
 
 //add Custom Services
 builder.AddSwaggenGenExtension();

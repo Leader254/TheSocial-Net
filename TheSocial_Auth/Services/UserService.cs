@@ -15,7 +15,7 @@ namespace TheSocial_Auth.Services
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ITokenGenerator _tokenGenerator;
         private readonly IMapper _mapper;
-        
+
         //constructor
         public UserService(UserManager<ApplicationUser> userManager, AppDbContext context, RoleManager<IdentityRole> roleManager, ITokenGenerator tokenGenerator, IMapper mapper)
         {
@@ -30,11 +30,11 @@ namespace TheSocial_Auth.Services
             //get user by email
             var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Email == email);
             //check if user is null
-            if(user != null)
+            if (user != null)
             {
-                if(!_roleManager.RoleExistsAsync(role).GetAwaiter().GetResult())
+                if (!_roleManager.RoleExistsAsync(role).GetAwaiter().GetResult())
                 {
-                     _roleManager.CreateAsync(new IdentityRole(role)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(role)).GetAwaiter().GetResult();
                 }
                 //assign role to user
                 await _userManager.AddToRoleAsync(user, role);
@@ -49,10 +49,10 @@ namespace TheSocial_Auth.Services
             //check valid password
             var result = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
 
-            if(!result || user == null)
+            if (!result || user == null)
             {
                 new LoginResponseDto();
-            }   
+            }
 
             var roles = await _userManager.GetRolesAsync(user);
             var token = _tokenGenerator.GenerateToken(user, roles);
@@ -68,12 +68,13 @@ namespace TheSocial_Auth.Services
         public async Task<string> RegisterUser(RegisterUserDto registerUserDto)
         {
             var user = _mapper.Map<ApplicationUser>(registerUserDto);
-            try 
+            try
             {
                 var result = await _userManager.CreateAsync(user, registerUserDto.Password);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
-                    return "User Created Successfully!!!";
+                    //return nothing if success
+                    return "";
                 }
                 else
                 {
@@ -84,7 +85,7 @@ namespace TheSocial_Auth.Services
             {
                 Console.WriteLine(e);
                 throw;
-            }   
+            }
         }
     }
 }

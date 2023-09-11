@@ -181,3 +181,4 @@ C:\Users\Samuel\source\repos\Social\TheSocial_Auth\obj\Debug\net7.0\scopedcss\bu
 C:\Users\Samuel\source\repos\Social\TheSocial_Auth\obj\Debug\net7.0\TheSocial_Auth.csproj.CopyComplete
 C:\Users\Samuel\source\repos\Social\TheSocial_Auth\obj\Debug\net7.0\TheSocial_Auth.genruntimeconfig.cache
 C:\Users\Samuel\source\repos\Social\TheSocial_Auth\obj\Debug\net7.0\ref\TheSocial_Auth.dll
+C:\Users\Samuel\source\repos\Social\TheSocial_Auth\obj\Debug\net7.0\TheSocial_Auth.MvcApplicationPartsAssemblyInfo.cs

@@ -1,6 +1,8 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TheSocial_Post.Context;
 using TheSocial_Post.Models;
+using TheSocial_Post.Models.Dtos;
 using TheSocial_Post.Services.IService;
 
 namespace TheSocial_Post.Services
@@ -8,10 +10,14 @@ namespace TheSocial_Post.Services
     public class PostService : IPostService
     {
         private readonly AppDbContext _context;
+        private readonly ICommentInterface _commentInterface;
+        private readonly IMapper _mapper;
 
-        public PostService(AppDbContext context)
+        public PostService(AppDbContext context, ICommentInterface commentsInerface, IMapper mapper)
         {
             _context = context;
+            _commentInterface = commentsInerface;
+            _mapper = mapper;
         }
         // create a post
         public async Task<string> CreatePostAsync(Post post)
@@ -36,7 +42,13 @@ namespace TheSocial_Post.Services
         // get post by id
         public async Task<Post> GetPostByIdAsync(Guid postId)
         {
-            return await _context.Posts.Where(x => x.PostId == postId).FirstOrDefaultAsync();
+            var post = await _context.Posts.Where(x => x.PostId == postId).FirstOrDefaultAsync();
+            if (post != null)
+            {
+                post.Comments = await _commentInterface.GetCommentsAsync(postId);
+                return post;
+            }
+            return new Post();
         }
         // get posts by user id
         public async Task<IEnumerable<Post>> GetPostsByUserIdAsync(Guid userId)

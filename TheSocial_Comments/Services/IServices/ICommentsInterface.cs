@@ -10,5 +10,6 @@ namespace TheSocial_Comments.Services.IServices
         Task<IEnumerable<Comment>> GetAllCommentsAsync();
         Task<Comment> GetCommentByIdAsync(Guid commentId);
         Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(Guid postId);
+        Task<IEnumerable<Comment>> GetCommentsByUserIdAsync(Guid userId);
     }
 }

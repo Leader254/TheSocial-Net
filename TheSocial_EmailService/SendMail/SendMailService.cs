@@ -9,7 +9,7 @@ namespace TheSocial_EmailService.SendMail
         public async Task SendMail(UserMessage res, string message)
         {
             MimeMessage message1 = new MimeMessage();
-            message1.From.Add(new MailboxAddress("SocialApp", "samuelwachira219@gmail.com"));
+            message1.From.Add(new MailboxAddress("SocialApp", "devsamuel219@gmail.com"));
 
             message1.To.Add(new MailboxAddress(res.Name, res.Email));
 
@@ -23,7 +23,7 @@ namespace TheSocial_EmailService.SendMail
             message1.Body = body;
             var client = new SmtpClient();
             client.Connect("smtp.gmail.com", 587, false);
-            client.Authenticate("samuelwachira219@gmail.com", "ijlzzfgroyllvuqu");
+            client.Authenticate("devsamuel219@gmail.com", "ejjmpuzcrchugowe");
             await client.SendAsync(message1);
             await client.DisconnectAsync(true);
         }
