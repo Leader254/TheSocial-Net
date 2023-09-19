@@ -4231,11 +4231,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Samuel\\source\\repos\\Social\\TheSocial_Comments\\TheSocial_Comments.csproj",
+      "projectUniqueName": "c:\\Users\\Samuel\\source\\repos\\Social\\TheSocial_Comments\\TheSocial_Comments.csproj",
       "projectName": "TheSocial_Comments",
-      "projectPath": "C:\\Users\\Samuel\\source\\repos\\Social\\TheSocial_Comments\\TheSocial_Comments.csproj",
+      "projectPath": "c:\\Users\\Samuel\\source\\repos\\Social\\TheSocial_Comments\\TheSocial_Comments.csproj",
       "packagesPath": "C:\\Users\\Samuel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Samuel\\source\\repos\\Social\\TheSocial_Comments\\obj\\",
+      "outputPath": "c:\\Users\\Samuel\\source\\repos\\Social\\TheSocial_Comments\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Samuel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4246,7 +4246,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.307\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.308\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4327,7 +4327,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.307\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.308\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -574,11 +574,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Samuel\\source\\repos\\Social\\TheMessage_Bus\\TheMessage_Bus.csproj",
+      "projectUniqueName": "c:\\Users\\Samuel\\source\\repos\\Social\\TheMessage_Bus\\TheMessage_Bus.csproj",
       "projectName": "TheMessage_Bus",
-      "projectPath": "C:\\Users\\Samuel\\source\\repos\\Social\\TheMessage_Bus\\TheMessage_Bus.csproj",
+      "projectPath": "c:\\Users\\Samuel\\source\\repos\\Social\\TheMessage_Bus\\TheMessage_Bus.csproj",
       "packagesPath": "C:\\Users\\Samuel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Samuel\\source\\repos\\Social\\TheMessage_Bus\\obj\\",
+      "outputPath": "c:\\Users\\Samuel\\source\\repos\\Social\\TheMessage_Bus\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Samuel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -632,7 +632,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.307\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.308\\RuntimeIdentifierGraph.json"
       }
     }
   }
