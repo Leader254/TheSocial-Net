@@ -1,14 +1,19 @@
 ﻿@inherits LayoutComponentBase
-
+@inject NavigationManager NavigationManager
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+        <nav class="navbar navbar-light bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white fw-bold">SocialConnect.</a>
+                <form class="d-flex gap-4">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success text-white" @onclick="register">Register</button>
+                    <button class="btn btn-outline-success text-white" @onclick="login">Login</button>
+                    <button class="btn btn-outline-danger text-white" @onclick="logout">Logout</button>
+                </form>
+            </div>
+        </nav>
 
         <article class="content px-4">
             @Body

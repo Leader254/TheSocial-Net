@@ -9,13 +9,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.11" PrivateAssets="all" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\Authentication\" />
     <Folder Include="Models\Comments\" />
     <Folder Include="Models\Posts\" />
-    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
 </Project>

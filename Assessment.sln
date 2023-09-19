@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheSocial_EmailService", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMessage_Bus", "TheMessage_Bus\TheMessage_Bus.csproj", "{A5298476-A7E5-443C-A1EE-09DE93084E43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{7F5827ED-E711-4CD7-8EC3-3BF8B9483E5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frontend", "Frontend\Frontend.csproj", "{7F5827ED-E711-4CD7-8EC3-3BF8B9483E5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

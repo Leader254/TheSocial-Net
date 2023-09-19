@@ -1,0 +1,45 @@
+﻿@page "/login"
+@using Frontend.Models.Authentication;
+@inject IAuthInterface authInterface
+<div class="row m-2">
+
+    <div class="col-4 align-self-center">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
+    </div>
+    <div class="col-4">
+        <h1> Login User</h1>
+        <EditForm Model="@newUser" OnValidSubmit="loginUser">
+            <DataAnnotationsValidator />
+            <div class="form-group p-2">
+                <label for="name">Email</label>
+                <InputText type="text" class="form-control p-2" id="name" @bind-Value="@newUser.Username" aria-describedby="name" />
+                <ValidationMessage For="@(()=>newUser.Username)" />
+            </div>
+
+            <div class="form-group p-2">
+                <label for="password">Password</label>
+                <InputText type="password" class="form-control p-2" id="password" @bind-Value="@newUser.Password" aria-describedby="name" />
+                <ValidationMessage For="@(()=>newUser.Password)" />
+            </div>
+
+            <div class="flex-row m-2" p-2>
+                <button type="submit" style="width:100px" class=" p-2 m-1 btn btn-primary">Submit</button>
+                <button type="button" style="width:100px" class="p-2 btn btn-secondary">Reset</button>
+            </div>
+            <div class="row">
+                <p class="col-4">Don't have an accout <a class="col-1" href="register">Register</a></p>
+
+            </div>
+        </EditForm>
+
+    </div>
+</div>
+@code {
+    private LoginRequestDto newUser = new LoginRequestDto();
+    private async Task loginUser()
+    {
+        var result = await authInterface.Login(newUser);
+        Console.WriteLine(result.Token);
+    }
+
+}

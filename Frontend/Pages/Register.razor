@@ -1,0 +1,63 @@
+﻿@page "/signup"
+@inject IAuthInterface authInterface
+@inject NavigationManager navigationManager
+<div class="d-flex justify-content-center">
+
+    <div class="col-4">
+        <h1> Register User</h1>
+        <EditForm Model="@newUser" OnValidSubmit="registerUser">
+            <DataAnnotationsValidator />
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+                <InputText type="text" class="form-control p-2" id="name" @bind-Value="@newUser.Name" aria-describedby="name" />
+                <ValidationMessage For="@(()=>newUser.Name)" />
+            </div>
+
+            <div class="form-group p-2">
+                <label for="name">Email</label>
+                <InputText type="email" class="form-control p-2" id="email" @bind-Value="@newUser.Email" aria-describedby="name" />
+                <ValidationMessage For="@(()=>newUser.Email)" />
+            </div>
+
+            <div class="form-group p-2">
+                <label for="Phone">Phonenumber</label>
+                <InputText type="tel" class="form-control p-2" id="Phone" @bind-Value="@newUser.PhoneNumber" aria-describedby="name" />
+                <ValidationMessage For="@(()=>newUser.PhoneNumber)" />
+            </div>
+
+            <div class="form-group p-2">
+                <label for="password">PassWord</label>
+                <InputText type="text" class="form-control p-2" id="password" @bind-Value="@newUser.Password" aria-describedby="name" />
+                <ValidationMessage For="@(()=>newUser.Password)" />
+            </div>
+
+            <div class="flex-row m-2" p-2>
+                <button type="submit" style="width:100px" class=" p-2 m-1 btn btn-primary">Submit</button>
+                <button type="button" style="width:100px" class="p-2 btn btn-secondary">Reset</button>
+            </div>
+            <div class="row">
+                <p class="col-4">Already a member? <a class="col-1" href="login">Login</a></p>
+
+            </div>
+        </EditForm>
+
+    </div>
+    <div class="col-4 align-self-center">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
+    </div>
+</div>
+                           
+
+@code {
+    private RegisterUserDto newUser = new RegisterUserDto();
+    private async Task registerUser()
+    {
+        var result = await authInterface.Register(newUser);
+        //if (result.Succeeded) navigate to login
+        if(result.Success)
+        {
+            navigationManager.NavigateTo("/login");
+        } 
+    }
+
+}
