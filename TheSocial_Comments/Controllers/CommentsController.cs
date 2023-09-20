@@ -53,7 +53,7 @@ namespace TheSocial_Comments.Controllers
 
         // get all comments
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<ResponseDto>> GetAllComments()
         {
             var comments = await _commentInterface.GetAllCommentsAsync();

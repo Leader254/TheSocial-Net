@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\TheSocial_Auth",
+    "\\Frontend",
+    "\\Frontend\\Pages",
+    "\\Frontend\\Shared",
     "\\TheSocial_Auth\\Services"
   ],
-  "SelectedNode": "\\TheSocial_Auth\\Services\\UserService.cs",
+  "SelectedNode": "\\Frontend\\Shared\\MainLayout.razor",
   "PreviewInSolutionExplorer": false
 }

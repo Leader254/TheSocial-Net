@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessment", "Assessment\Assessment.csproj", "{019B3FE8-DB3C-466D-9A75-18DA36E85BBE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheSocial_Auth", "TheSocial_Auth\TheSocial_Auth.csproj", "{FFFFE7B3-AB87-4164-AC14-5F83C9077DF0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheSocial_Post", "TheSocial_Post\TheSocial_Post.csproj", "{62EC8824-A24A-4788-8998-7B0491E547C9}"
@@ -23,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{019B3FE8-DB3C-466D-9A75-18DA36E85BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{019B3FE8-DB3C-466D-9A75-18DA36E85BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{019B3FE8-DB3C-466D-9A75-18DA36E85BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{019B3FE8-DB3C-466D-9A75-18DA36E85BBE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFFFE7B3-AB87-4164-AC14-5F83C9077DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFFFE7B3-AB87-4164-AC14-5F83C9077DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFFFE7B3-AB87-4164-AC14-5F83C9077DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
