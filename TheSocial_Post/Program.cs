@@ -28,7 +28,12 @@ builder.Services.AddScoped<ICommentInterface, CommentsService>();
 builder.Services.AddScoped<IPostService, PostService>();
 // registering the base url for the client app
 builder.Services.AddHttpClient("Comments", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CommentApi"])).AddHttpMessageHandler<Util>();
-
+builder.Services.AddCors(options => options.AddPolicy("mypolicy", build =>
+{
+    build.WithOrigins("https://localhost:7003");
+    build.AllowAnyMethod();
+    build.AllowAnyHeader();
+}));
 
 //add Custom Services
 builder.AddSwaggenGenExtension();
@@ -46,7 +51,7 @@ app.UseMigration();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors("mypolicy");
 app.MapControllers();
 
 app.Run();
