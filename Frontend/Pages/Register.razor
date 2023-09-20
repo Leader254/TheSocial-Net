@@ -32,11 +32,11 @@
             </div>
 
             <div class="flex-row m-2" p-2>
-                <button type="submit" style="width:100px" class=" p-2 m-1 btn btn-primary">Submit</button>
+                <button type="submit" style="width:100px" class=" p-2 m-1 btn btn-primary" disabled="@IsDisabled">Submit</button>
                 <button type="button" style="width:100px" class="p-2 btn btn-secondary">Reset</button>
             </div>
             <div class="row">
-                <p class="col-4">Already a member? <a class="col-1" href="login">Login</a></p>
+                <p class="col-6">Already a member? <a class="col-1" href="login">Login</a></p>
 
             </div>
         </EditForm>
@@ -50,9 +50,12 @@
 
 @code {
     private RegisterUserDto newUser = new RegisterUserDto();
+    protected bool IsDisabled { get; set; }
     private async Task registerUser()
     {
+        IsDisabled = true;
         var result = await authInterface.Register(newUser);
+        IsDisabled = false;
         //if (result.Succeeded) navigate to login
         if(result.Success)
         {

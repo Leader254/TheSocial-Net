@@ -6,7 +6,9 @@
 @inject ILocalStorageService localStorage
 @inject AuthenticationStateProvider authProvider
 @inject IAuthInterface authInterface
-<div class="row m-2">
+@inject NavigationManager navigationManager
+@inject ILocalStorageService localStorageService
+<div class="d-flex justify-content-center">
 
     <div class="col-4 align-self-center">
         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
@@ -55,5 +57,6 @@
         }
         
     }
+    
 
 }
