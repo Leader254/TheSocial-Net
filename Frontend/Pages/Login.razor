@@ -1,5 +1,10 @@
 ﻿@page "/login"
+@using Blazored.LocalStorage;
 @using Frontend.Models.Authentication;
+@using Microsoft.AspNetCore.Components.Authorization;
+@inject NavigationManager navigationManager
+@inject ILocalStorageService localStorage
+@inject AuthenticationStateProvider authProvider
 @inject IAuthInterface authInterface
 <div class="row m-2">
 
@@ -40,6 +45,15 @@
     {
         var result = await authInterface.Login(newUser);
         Console.WriteLine(result.Token);
+
+
+        if (!string.IsNullOrWhiteSpace(result.Token))
+        {
+            await localStorage.SetItemAsStringAsync("authToken", result.Token);
+            await authProvider.GetAuthenticationStateAsync();
+            navigationManager.NavigateTo("");
+        }
+        
     }
 
 }
