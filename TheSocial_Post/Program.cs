@@ -30,7 +30,8 @@ builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddHttpClient("Comments", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CommentApi"])).AddHttpMessageHandler<Util>();
 builder.Services.AddCors(options => options.AddPolicy("mypolicy", build =>
 {
-    build.WithOrigins("https://localhost:7003");
+    //build.WithOrigins("https://localhost:7003");
+    build.AllowAnyOrigin();
     build.AllowAnyMethod();
     build.AllowAnyHeader();
 }));
