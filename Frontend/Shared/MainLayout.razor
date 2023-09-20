@@ -1,6 +1,8 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
 <Spinner></Spinner>
+@inject AuthenticationStateProvider authProvider
+@inject NavigationManager navigationManager
 <div class="page">
 
     <main>
@@ -8,10 +10,22 @@
             <div class="container-fluid">
                 <a class="navbar-brand text-white fw-bold">SocialConnect.</a>
                 <form class="d-flex gap-4">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success text-white" @onclick="register">Register</button>
-                    <button class="btn btn-outline-success text-white" @onclick="login">Login</button>
-                    <button class="btn btn-outline-danger text-white" @onclick="logout">Logout</button>
+                    <CascadingAuthenticationState>
+                        <AuthorizeView>
+                            <Authorized>
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-danger text-white" @onclick="logout">Logout</button>
+                            </Authorized>
+
+                            <NotAuthorized>
+                             
+                                <button class="btn btn-outline-success text-white" @onclick="register">Register</button>
+                                <button class="btn btn-outline-success text-white" @onclick="login">Login</button>
+                            </NotAuthorized>
+                        </AuthorizeView>
+                    </CascadingAuthenticationState>          
+                 
+                  
                 </form>
             </div>
         </nav>

@@ -1,45 +1,64 @@
 ﻿@page "/"
-@inject ICommentInterface commentInterface
-<PageTitle>Home</PageTitle>
-
-@*@if(isLoggedIn)
-{
-    <h1>Hello @user.Name</h1>
-}
-else
-{
-    <h1>Hello Guest</h1>
-})*@
-
-@if(isLoading)
-{
-    <Spinner></Spinner>
-}
-else
-{
-    <div>
-    @foreach (var comment in comments)
-    {
-            <div class="card col-2 shadow m-2">
-            <div class="card-body">
-                <h5 class="card-title">@comment.CommentText</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">CreatedAt: @comment.CreatedOn.ToString("h:mm tt")</h6>
+@inject IPostInterface postInterface
+<div class="row">
+   <div class="col-2">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">My Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/CreatePost">New Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Posts</a>
+            </li>
+          
+        </ul>
+   </div>
+   <div class="col-6">
+        @if (isLoading)
+        {
+            <button class="btn btn-primary" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                <span class="visually-hidden" role="status">Loading...</span>
+            </button>
+            <button class="btn btn-primary" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                <span role="status">Loading...</span>
+            </button>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var post in Posts)
+                {
+                    <div class="card m-2 p-2 shadow-lg" style="width: 16rem; height:350px;">
+                        <img src="@post.Body" class="card-img-top" alt="..." style="height:200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">@post.Title</h5>
+                          
+                            <p class="card-text">@post.CreatedAt</p>
+                            <a href="#" class="btn btn-primary">View Post</a>
+                            <a href="#" class="btn btn-primary">Comment</a>
+                        </div>
+                    </div>
+                    
+                    
+                }
             </div>
-        </div>
-    }
+           
+        }
     </div>
-}
-
-
-@code
-{
-    private List<Comment> comments = new List<Comment>();
-
+    <div class="col-4">
+        <h1>Comments</h1>
+    </div>
+</div>
+@code{
+    private List<PostDto> Posts = new List<PostDto>();
     private bool isLoading = true;
-
     protected override async Task OnInitializedAsync()
     {
-        comments = await commentInterface.GetAllComments();
+        Posts = await postInterface.GetAllPostsAsync();
         isLoading = false;
     }
 }

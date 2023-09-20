@@ -1,9 +1,12 @@
 using Blazored.LocalStorage;
+using Blazored.LocalStorage;
 using Frontend;
 using Frontend.Services;
 using Frontend.Services.AuthProvider;
+using Frontend.Services.AuthProvider;
 using Frontend.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -26,15 +29,17 @@ builder.Services.AddScoped(s =>
         BaseAddress = new Uri(uriHelper.BaseUri)
     };
 });
-builder.Services.AddScoped<IAuthInterface, AuthService>();
-builder.Services.AddScoped<ICommentInterface, CommentsService>();
-//register loacal storage
+//register localstorage
 builder.Services.AddBlazoredLocalStorage();
 
-//config for AuthProvider
+//services
+builder.Services.AddScoped<IAuthInterface, AuthService>();
+builder.Services.AddScoped<IPostInterface, PostService>();
+
+//configurations for authorization
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProviderService>();
 
 
 await builder.Build().RunAsync();
