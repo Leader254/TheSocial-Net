@@ -1,7 +1,45 @@
 ﻿@page "/"
-
+@inject ICommentInterface commentInterface
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+@*@if(isLoggedIn)
+{
+    <h1>Hello @user.Name</h1>
+}
+else
+{
+    <h1>Hello Guest</h1>
+})*@
 
-Welcome to your new app.
+@if(isLoading)
+{
+    <Spinner></Spinner>
+}
+else
+{
+    <div>
+    @foreach (var comment in comments)
+    {
+            <div class="card col-2 shadow m-2">
+            <div class="card-body">
+                <h5 class="card-title">@comment.CommentText</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">CreatedAt: @comment.CreatedOn.ToString("h:mm tt")</h6>
+            </div>
+        </div>
+    }
+    </div>
+}
+
+
+@code
+{
+    private List<Comment> comments = new List<Comment>();
+
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        comments = await commentInterface.GetAllComments();
+        isLoading = false;
+    }
+}

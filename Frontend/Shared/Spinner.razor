@@ -1,0 +1,45 @@
+﻿@using Faso.Blazor.SpinKit
+@inject SpinnerService SpinnerService
+
+<style>
+    .spinner-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: fixed;
+        z-index: 999;
+        color: white;
+        opacity: 0.4;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+</style>
+@if (IsVisible)
+{
+    <div class="spinner-container">
+        <SpinKitCircle />
+    </div>
+}
+@code
+{
+    protected bool IsVisible { get; set; }
+    protected override void OnInitialized()
+    {
+        SpinnerService.OnShow += ShowSpinner;
+        SpinnerService.OnHide += HideSpinner;
+    }
+
+    public void ShowSpinner()
+    {
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    public void HideSpinner()
+    {
+        IsVisible = false;
+        StateHasChanged();
+    }
+}

@@ -17,6 +17,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"));
 });
 
+//cors policy
+builder.Services.AddCors(options => options.AddPolicy("mypolicy", build =>
+{
+    build.WithOrigins("https://localhost:7003");
+    build.AllowAnyMethod();
+    build.AllowAnyHeader();
+}));
 //Register Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -39,6 +46,7 @@ app.UseMigration();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("mypolicy");
 
 app.MapControllers();
 
