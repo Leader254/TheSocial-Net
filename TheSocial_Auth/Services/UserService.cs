@@ -43,6 +43,11 @@ namespace TheSocial_Auth.Services
             return false;
         }
 
+        public async Task<IEnumerable<ApplicationUser>> GetUsers()
+        {
+            return await _context.ApplicationUsers.ToListAsync();
+        }
+
         public async Task<LoginResponseDto> LoginUser(LoginRequestDto loginRequestDto)
         {
             var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.UserName.ToLower() == loginRequestDto.Username.ToLower());

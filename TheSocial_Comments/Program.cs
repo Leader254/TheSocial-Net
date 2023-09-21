@@ -5,7 +5,7 @@ using TheSocial_Comments.Services;
 using TheSocial_Comments.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -17,6 +17,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"));
 });
 
+
+//Register Automapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ICommentsInterface, CommentService>();
 //cors policy
 builder.Services.AddCors(options => options.AddPolicy("mypolicy", build =>
 {
@@ -24,10 +29,6 @@ builder.Services.AddCors(options => options.AddPolicy("mypolicy", build =>
     build.AllowAnyMethod();
     build.AllowAnyHeader();
 }));
-//Register Automapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddScoped<ICommentsInterface, CommentService>();
 builder.AddSwaggenGenExtension();
 builder.AddAppAuthentication();
 
@@ -42,11 +43,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseMigration();
 
-
+app.UseCors("mypolicy");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors("mypolicy");
+
 
 app.MapControllers();
 

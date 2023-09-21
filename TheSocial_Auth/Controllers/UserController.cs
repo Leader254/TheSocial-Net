@@ -79,6 +79,20 @@ namespace TheSocial_Auth.Controllers
             _response.Message = "Role assigned successfully";
             return Ok(_response);
         }
+        //get all users
+        [HttpGet]
+        public async Task<ActionResult<ResponseDto>> GetAllUsers()
+        {
+            var result = await _userService.GetUsers();
+            if (result == null)
+            {
+                _response.Success = false;
+                _response.Message = "Could not get users";
+                return BadRequest( _response);
+            }
+            _response.Data = result;
+            return Ok(_response);
+        }
 
     }
 }

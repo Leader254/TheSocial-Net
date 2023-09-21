@@ -16,6 +16,21 @@ namespace Frontend.Services
         {
             _httpClient = httpClient;
         }
+
+        public async Task<List<UserDto>> GetUserAll()
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/api/User");
+            var content = await response.Content.ReadAsStringAsync();
+
+            var results = JsonConvert.DeserializeObject<ResponseDto>(content);
+            if (results.Success)
+            {
+                //change the object to a list
+                return JsonConvert.DeserializeObject<List<UserDto>>(results.Data.ToString());
+            }
+            return new List<UserDto>();
+        }
+
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
             var request = JsonConvert.SerializeObject(loginRequestDto);

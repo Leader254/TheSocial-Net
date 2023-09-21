@@ -32,6 +32,7 @@ builder.Services.AddBlazoredLocalStorage();
 //services
 builder.Services.AddScoped<IAuthInterface, AuthService>();
 builder.Services.AddScoped<IPostInterface, PostService>();
+builder.Services.AddScoped<ICommentInterface, CommentsService>();
 
 //configurations for authorization
 builder.Services.AddOptions();
