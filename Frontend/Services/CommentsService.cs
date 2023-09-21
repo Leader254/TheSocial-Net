@@ -2,6 +2,7 @@
 using Frontend.Models.Comments;
 using Frontend.Services.Interfaces;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace Frontend.Services
 {
@@ -14,9 +15,19 @@ namespace Frontend.Services
         {
             _httpClient = httpClient;
         }
-        public Task<string> CreateComment(Comment comment)
+
+        public async Task<ResponseDto> CreateComment(CommentRequestDto commentRequestDto)
         {
-            throw new NotImplementedException();
+            var request = JsonConvert.SerializeObject(commentRequestDto);
+            var bodyContent = new StringContent(request, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{_baseUrl}/api/Comments", bodyContent);
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseDto>(content);
+            if (result.Success)
+            {
+                return result;
+            }
+            return new ResponseDto();
         }
 
         public async Task<List<Comment>> GetAllComments()
@@ -30,5 +41,7 @@ namespace Frontend.Services
             }
             return new List<Comment>();
         }
+
+      
     }
 }

@@ -1,4 +1,5 @@
-﻿using TheSocial_Auth.Models.Dtos;
+﻿using TheSocial_Auth.Models;
+using TheSocial_Auth.Models.Dtos;
 
 namespace TheSocial_Auth.Services.IService
 {
@@ -10,5 +11,8 @@ namespace TheSocial_Auth.Services.IService
         Task<LoginResponseDto> LoginUser(LoginRequestDto loginRequestDto);
         //assign role method
         Task<bool> AssignRole(string email, string role);
+
+        //added end point to get users
+        Task<IEnumerable<ApplicationUser>> GetUsers();
     }
 }
