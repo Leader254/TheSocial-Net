@@ -12,16 +12,16 @@ namespace Frontend.Services
         private readonly string _baseUrl = "https://localhost:7228";
         public PostService(HttpClient httpClient)
         {
-                _httpClient=httpClient;
+            _httpClient = httpClient;
         }
         public async Task<ResponseDto> AddPostAsync(PostRequestDto newPost)
         {
-           var request = JsonConvert.SerializeObject(newPost);
-            var bodyContent = new StringContent(request,Encoding.UTF8, "application/json");
+            var request = JsonConvert.SerializeObject(newPost);
+            var bodyContent = new StringContent(request, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync($"{_baseUrl}/api/Post", bodyContent);
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseDto>(content);
-            if(result.Success)
+            if (result.Success)
             {
                 return result;
             }
@@ -54,10 +54,16 @@ namespace Frontend.Services
             return new List<PostDto>();
         }
 
-        public Task<PostDto> GetPostById(Guid Postid)
+        public async Task<PostDto> GetPostById(Guid Postid)
         {
-
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync($"{_baseUrl}/api/Post/{Postid}");
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseDto>(content);
+            if (result.Success)
+            {
+                return JsonConvert.DeserializeObject<PostDto>(result.Data.ToString());
+            }
+            return new PostDto();
         }
 
         public Task<IEnumerable<PostDto>> GetUserPosts(Guid UserId)

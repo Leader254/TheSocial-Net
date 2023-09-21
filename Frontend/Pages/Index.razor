@@ -6,7 +6,7 @@
 @inject ICommentInterface commentInterface
 @inject IAuthInterface authInterface
 <div class="row">
-   <div class="col-2">
+    <div class="col-2">
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">My Account</a>
@@ -17,10 +17,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">My Posts</a>
             </li>
-          
+
         </ul>
+
    </div>
    <div class="col-6" style="height:90vh; overflow-y:scroll;">
+
+
         @if (isLoading)
         {
             <button class="btn btn-primary" type="button" disabled>
@@ -41,6 +44,7 @@
                         <img src="@post.Body" class="card-img-top" alt="..." style="height:40%;">
                         <div class="card-body">
                             <h5 class="card-title">@post.Title</h5>
+
                             <p class="card-text">@post.CreatedAt</p>
                             @foreach(var user in Users)
                             {
@@ -63,12 +67,20 @@
 
 
                     </div>                    
-                    
+                  
+
+                            <p class="card-text">@post.CreatedAt</p>
+                            <a class="btn btn-primary" @onclick="(() => viewSinglePost(post.PostId))">View Post</a>
+                            <a class="btn btn-primary">Comment</a>
+                        </div>
+                    </div>
+
                 }
             </div>
-           
+
         }
     </div>
+
     <div class="col-4">
         <h6>Post Details</h6>
         @if(SelectedPost != null)
@@ -115,15 +127,18 @@
             <p>select post to view details</p>
         }     
     </div>
+
 </div>
-@code{
+@code {
     private List<PostDto> Posts = new List<PostDto>();
     private bool isLoading = true;
+
     private PostDto? SelectedPost;
     private List<UserDto> Users = new List<UserDto>();
     private List<Comment> SelectedPostComments = new List<Comment>();
     private Dictionary<Guid, Comment> postComments = new Dictionary<Guid, Comment>();
     private UserDto? CommentUser;
+
     protected override async Task OnInitializedAsync()
     {
         Posts = await postInterface.GetAllPostsAsync();
@@ -173,5 +188,6 @@
     }
    
    
+
 
 }
