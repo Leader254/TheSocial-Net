@@ -1,0 +1,43 @@
+﻿<div class="card mb-3 " style="height:90vh;">
+    <img src="@postDto.Body" class="card-img-top" alt="..." style="height:50%;">
+    <div class="card-body">
+        <h5 class="card-title">@postDto.Title</h5>
+        <p class="card-text"><small class="text-body-secondary">Last updated  @postDto.CreatedAt</small></p>
+    </div>
+    <div style="height:40%; overflow-y:scroll;" class="p-3">
+        @if (postDto.Comments != null)
+        {
+            <h5> Comments</h5>
+            @foreach (var comment in postDto.Comments)
+            {
+                <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                    @foreach (var user in Users)
+                    {
+                        if (user.Id == comment.UserId)
+                        {
+                            <div class="card-header">@user.name</div>
+                        }
+                    }
+                    <div class="card-body">
+                        <p class="card-text">@comment.CommentText</p>
+                        <p class="card-text">@comment.CreatedOn</p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>no comments yet!!</p>
+        }
+
+    </div>
+
+
+</div>
+
+@code {
+    [Parameter]
+    public PostDto? postDto { get; set; }
+    [Parameter]
+    public List<UserDto>? Users { get; set; }
+}

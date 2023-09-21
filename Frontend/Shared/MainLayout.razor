@@ -1,37 +1,34 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
-<Spinner></Spinner>
 @inject AuthenticationStateProvider authProvider
 @inject NavigationManager navigationManager
-<div class="page">
 
-    <main>
-        <nav class="navbar navbar-light bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand text-white fw-bold">SocialConnect.</a>
-                <form class="d-flex gap-4">
-                    <CascadingAuthenticationState>
-                        <AuthorizeView>
-                            <Authorized>
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-danger text-white" @onclick="logout">Logout</button>
-                            </Authorized>
+<nav class="navbar navbar-light bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white fw-bold">SocialConnect.</a>
+        <form class="d-flex gap-4">
+            <CascadingAuthenticationState>
+                <AuthorizeView>
+                    <Authorized>
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-danger text-white" @onclick="logout">Logout</button>
+                    </Authorized>
 
-                            <NotAuthorized>
-                             
-                                <button class="btn btn-outline-success text-white" @onclick="register">Register</button>
-                                <button class="btn btn-outline-success text-white" @onclick="login">Login</button>
-                            </NotAuthorized>
-                        </AuthorizeView>
-                    </CascadingAuthenticationState>          
-                 
-                  
-                </form>
-            </div>
-        </nav>
+                    <NotAuthorized>
 
-        <article class="content px-4">
+                        <button class="btn btn-outline-success text-white" @onclick="register">Register</button>
+                        <button class="btn btn-outline-success text-white" @onclick="login">Login</button>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </CascadingAuthenticationState>
+
+
+        </form>
+    </div>
+</nav>
+<Spinner></Spinner>       
+ <main>
+      
             @Body
-        </article>
-    </main>
-</div>
+        
+ </main>
