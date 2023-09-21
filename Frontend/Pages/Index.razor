@@ -5,20 +5,20 @@
 @inject IPostInterface postInterface
 @inject ICommentInterface commentInterface
 @inject IAuthInterface authInterface
+@inject NavigationManager navigationManager
 <div class="row">
-   <div class="col-2" style="position:fixed;">
+   <div class="col-2">
         <SideBar/>
    </div>
-      
-   
-   <div class="col-6" style="height:90vh; overflow-y:scroll;">
+
+    <div class="col-5 " style="height:90vh; overflow-y:scroll;">
         @if (isLoading)
         {
            <Spinner/>
         }
         else
         {
-            <div class="row">
+            <div>
                 @foreach (var post in Posts)
                 {
                     <PostCard postDto="post" Viewpost="SelectPost" Users="Users"/>                  
@@ -28,20 +28,18 @@
            
         }
     </div>
-    <div class="col-4">
-        
-        @if(SelectedPost != null)
+   
+
+    <div class="col-5">
+        @if (SelectedPost != null)
         {
-           
-               
-           <ViewPost postDto="SelectedPost" Users="Users"/>
-        
+            <ViewPost postDto="SelectedPost" Users="Users" DeletePost="DeletePost" />
+     
+    
         }
-        else
-        {
-            <p>select post to view details</p>
-        }     
     </div>
+    
+   
 </div>
 @code{
     private List<PostDto> Posts = new List<PostDto>();
@@ -65,6 +63,12 @@
         var AllComments = await commentInterface.GetAllComments();
         SelectedPostComments = AllComments.Where(c => c.PostId == post.postId).ToList();
         SelectedPost.Comments = SelectedPostComments;
+
+    }
+    public async void DeletePost(Guid id)
+    {
+        await postInterface.DeletePostAsync(id);
+        navigationManager.NavigateTo("");
 
     }
 

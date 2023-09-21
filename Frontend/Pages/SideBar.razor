@@ -1,13 +1,13 @@
-﻿
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height:90vh;">
+﻿@inject NavigationManager navigationManager
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 200px; height:90vh;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+       
         <span class="fs-4">Social Connect</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
+            <a href="/" class="nav-link active" aria-current="page">
                 
                 Home
             </a>
@@ -25,15 +25,15 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-body-emphasis">
+            <a href="/myposts" class="nav-link link-body-emphasis">
                
-                My Posts
+                Gallery
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-body-emphasis">
-              
-                Settings
+            <a href="/CreatePost" class="nav-link link-body-emphasis">
+
+                Create Post
             </a>
         </li>
     </ul>
@@ -55,5 +55,6 @@
 
 
 @code {
+    
 
 }

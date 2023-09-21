@@ -2,8 +2,8 @@
 @inject IPostInterface postInterface
 @inject ICommentInterface commentInterface
 @inject IAuthInterface authInterface
-<div class="card m-2 p-2 shadow-lg" style="width: 16rem; height:400px;">
-    <img src="@postDto.Body" class="card-img-top" alt="..." style="height:40%;">
+<div class="card m-5 p-2 shadow-lg" style="height:500px; width:90%; border-radius:15px;">
+    <img src="@postDto.Body" class="card-img-top" alt="..." style="height:50%;">
     <div class="card-body">
         <h5 class="card-title">@postDto.Title</h5>
         <p class="card-text">@postDto.CreatedAt</p>
@@ -26,7 +26,7 @@
         </div>
     </EditForm>
 
-    @*  <PostCard/> *@
+   
 </div>
 
 @code {

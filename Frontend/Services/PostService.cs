@@ -30,7 +30,7 @@ namespace Frontend.Services
 
         public async Task<ResponseDto> DeletePostAsync(Guid id)
         {
-            var response = await _httpClient.DeleteAsync($"{_baseUrl}/api/Post?id={id}");
+            var response = await _httpClient.DeleteAsync($"{_baseUrl}/api/Post/{id}");
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseDto>(content);
             if (result.Success)
@@ -54,16 +54,9 @@ namespace Frontend.Services
             return new List<PostDto>();
         }
 
-        public Task<PostDto> GetPostById(Guid Postid)
-        {
+      
 
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<PostDto>> GetUserPosts(Guid UserId)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public async Task<ResponseDto> UpdatePostAsync(Guid id, PostRequestDto UpdatePost)
         {

@@ -1,26 +1,42 @@
-﻿<div class="card mb-3 " style="height:90vh;">
-    <img src="@postDto.Body" class="card-img-top" alt="..." style="height:50%;">
-    <div class="card-body">
-        <h5 class="card-title">@postDto.Title</h5>
-        <p class="card-text"><small class="text-body-secondary">Last updated  @postDto.CreatedAt</small></p>
+﻿
+<div class="card p-3" style="height:90vh;">
+    <button type="button" class="btn btn-outline-success mb-2">Exit &#8592</button>
+    <img src="@postDto?.Body" class="card-img-top" alt="..." style="height:50%;">
+    <div class="card-body" style="display:flex; justify-content:space-between;">
+        <div>
+            <h5 class="card-title">@postDto?.Title</h5>
+            <p class="card-text"><small class="text-body-secondary">Last updated  @postDto?.CreatedAt</small></p>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" @onclick="(()=>EditPost(postDto))">Edit Post</button>
+            <button type="button" class="btn btn-danger" @onclick="Delete">Delete Post</button>
+        </div>
     </div>
+    <h5 class="mx-3"> Comments</h5>
     <div style="height:40%; overflow-y:scroll;" class="p-3">
         @if (postDto.Comments != null)
         {
-            <h5> Comments</h5>
+         
             @foreach (var comment in postDto.Comments)
             {
-                <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card text-bg-primary shadow mb-3" style="width:100%;">
                     @foreach (var user in Users)
                     {
                         if (user.Id == comment.UserId)
                         {
-                            <div class="card-header">@user.name</div>
+                            <div class="card-header"> @user.name</div>
                         }
                     }
-                    <div class="card-body">
-                        <p class="card-text">@comment.CommentText</p>
-                        <p class="card-text">@comment.CreatedOn</p>
+                    <div class="card-body" style="display:flex; justify-content:space-between;">
+                        <div>
+                            <p class="card-text">@comment.CommentText</p>
+                            <p class="card-text">@comment.CreatedOn</p>
+                        </div>
+                       
+                        <div>
+                            <button type="button" class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </div>
                     </div>
                 </div>
             }
@@ -29,7 +45,7 @@
         {
             <p>no comments yet!!</p>
         }
-
+        
     </div>
 
 
@@ -40,4 +56,18 @@
     public PostDto? postDto { get; set; }
     [Parameter]
     public List<UserDto>? Users { get; set; }
+    [Parameter]
+    public EventCallback<PostDto> UpdatePost { get; set; }
+    [Parameter]
+    public EventCallback<Guid> DeletePost { get; set; }
+
+    public async Task Delete()
+    {
+        await DeletePost.InvokeAsync(postDto.postId);
+    }
+    public async Task EditPost(PostDto postDto)
+    {
+        await UpdatePost.InvokeAsync(postDto);
+      
+    }
 }

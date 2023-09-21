@@ -3,25 +3,24 @@
 @inject AuthenticationStateProvider authProvider
 @inject NavigationManager navigationManager
 
-<nav class="navbar navbar-light bg-dark">
+<nav class="navbar navbar-light bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand text-white fw-bold">SocialConnect.</a>
+        <a class="navbar-brand text-black fw-bold">SocialConnect.</a>
         <form class="d-flex gap-4">
             <CascadingAuthenticationState>
                 <AuthorizeView>
                     <Authorized>
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-danger text-white" @onclick="logout">Logout</button>
+                        <button class="btn btn-outline-danger text-black" @onclick="logout">Logout</button>
                     </Authorized>
 
                     <NotAuthorized>
 
-                        <button class="btn btn-outline-success text-white" @onclick="register">Register</button>
-                        <button class="btn btn-outline-success text-white" @onclick="login">Login</button>
+                        <button class="btn btn-outline-success text-black" @onclick="register">Register</button>
+                        <button class="btn btn-outline-success text-black" @onclick="login">Login</button>
                     </NotAuthorized>
                 </AuthorizeView>
             </CascadingAuthenticationState>
-
 
         </form>
     </div>
