@@ -1,4 +1,5 @@
-﻿using Frontend.Models.Comments;
+﻿using Frontend.Models;
+using Frontend.Models.Comments;
 
 namespace Frontend.Services.Interfaces
 {
@@ -7,6 +8,8 @@ namespace Frontend.Services.Interfaces
         //get all comments
         Task<List<Comment>> GetAllComments();
         //create comment
-        Task<string> CreateComment(Comment comment);
+        Task<ResponseDto> CreateComment(CommentRequestDto commentRequestDto);
+
+        //get post comments
     }
 }
