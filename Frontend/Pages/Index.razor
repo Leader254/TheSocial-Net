@@ -7,11 +7,32 @@
 @inject IAuthInterface authInterface
 @inject NavigationManager navigationManager
 <div class="row">
+<<<<<<< HEAD
    <div class="col-2">
         <SideBar/>
    </div>
 
     <div class="col-5 " style="height:90vh; overflow-y:scroll;">
+=======
+    <div class="col-2">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">My Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/CreatePost">New Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Posts</a>
+            </li>
+
+        </ul>
+
+   </div>
+   <div class="col-6" style="height:90vh; overflow-y:scroll;">
+
+
+>>>>>>> 22160144f38103821f4c034de7d14f1d2a651f3b
         @if (isLoading)
         {
            <Spinner/>
@@ -21,14 +42,91 @@
             <div>
                 @foreach (var post in Posts)
                 {
+<<<<<<< HEAD
                     <PostCard postDto="post" Viewpost="SelectPost" Users="Users"/>                  
                     
+=======
+                    <div class="card m-2 p-2 shadow-lg" style="width: 16rem; height:400px;">
+                        <img src="@post.Body" class="card-img-top" alt="..." style="height:40%;">
+                        <div class="card-body">
+                            <h5 class="card-title">@post.Title</h5>
+
+                            <p class="card-text">@post.CreatedAt</p>
+                            @foreach(var user in Users)
+                            {
+                                if(user.Id == post.UserId)
+                                {
+                                    <p class="card-text" style="color:green">@user.name.ToLower()</p>
+                                }
+                            }                          
+                           
+                            <button href="" class="btn btn-primary" @onclick="(()=>SelectPost(post))">View Post</button>
+                            <button class="btn btn-primary" @onclick="@(()=>CommentAction(post.postId))">Comment</button>
+                        </div>
+                        
+                            <EditForm Model="@(GetCommentForPost(post.postId))">
+                                <div class="form-group p-2">
+                                <InputText type="text" class="form-control p-2" id="code" placeholder="Write a comment..." @bind-Value="@GetCommentForPost(post.postId).CommentText" aria-describedby="name" />
+                                <ValidationMessage For="@(() => GetCommentForPost(post.postId).CommentText)" />
+                                </div>
+                            </EditForm>                     
+
+
+                    </div>                    
+                  
+
+                            <p class="card-text">@post.CreatedAt</p>
+                            <a class="btn btn-primary" @onclick="(() => viewSinglePost(post.PostId))">View Post</a>
+                            <a class="btn btn-primary">Comment</a>
+                        </div>
+                    </div>
+
+>>>>>>> 22160144f38103821f4c034de7d14f1d2a651f3b
                 }
             </div>
-           
+
         }
     </div>
+<<<<<<< HEAD
    
+=======
+
+    <div class="col-4">
+        <h6>Post Details</h6>
+        @if(SelectedPost != null)
+        {
+            <div class="card mb-3 " style="height:90vh;">
+                <img src="@SelectedPost.Body" class="card-img-top" alt="..." style="height:50%;">
+                <div class="card-body">
+                    <h5 class="card-title">@SelectedPost.Title</h5>
+                    <p class="card-text"><small class="text-body-secondary">Last updated  @SelectedPost.CreatedAt</small></p>
+                </div>
+                <div style="height:40%; overflow-y:scroll;" class="p-3">
+                    @if (SelectedPost.Comments != null)
+                    {
+                        <h5> Comments</h5>
+                        @foreach (var comment in SelectedPost.Comments)
+                        {
+                            <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                                @foreach(var user in Users)
+                                {
+                                    if(user.Id == comment.UserId)
+                                    {
+                                        <div class="card-header">@user.name</div>
+                                    }
+                                }                               
+                                <div class="card-body">
+                                    <p class="card-text">@comment.CommentText</p>
+                                    <p class="card-text">@comment.CreatedOn</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>no comments yet!!</p>
+                    }
+>>>>>>> 22160144f38103821f4c034de7d14f1d2a651f3b
 
     <div class="col-5">
         @if (SelectedPost != null)
@@ -38,12 +136,17 @@
     
         }
     </div>
+<<<<<<< HEAD
     
    
+=======
+
+>>>>>>> 22160144f38103821f4c034de7d14f1d2a651f3b
 </div>
-@code{
+@code {
     private List<PostDto> Posts = new List<PostDto>();
     private bool isLoading = true;
+
     private PostDto? SelectedPost;
     private List<UserDto> Users = new List<UserDto>();
     private List<Comment> SelectedPostComments = new List<Comment>();
@@ -77,5 +180,6 @@
    
    
    
+
 
 }
