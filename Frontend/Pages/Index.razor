@@ -42,14 +42,17 @@
    
 </div>
 @code {
+@code {
     private List<PostDto> Posts = new List<PostDto>();
     private bool isLoading = true;
+
 
     private PostDto? SelectedPost;
     private List<UserDto> Users = new List<UserDto>();
     private List<Comment> SelectedPostComments = new List<Comment>();
     private Dictionary<Guid, Comment> postComments = new Dictionary<Guid, Comment>();
     private UserDto? CommentUser;
+
 
     protected override async Task OnInitializedAsync()
     {

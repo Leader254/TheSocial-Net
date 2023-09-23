@@ -55,10 +55,13 @@ namespace Frontend.Services
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       
 
        
 =======
+=======
+>>>>>>> 22160144f38103821f4c034de7d14f1d2a651f3b
         public async Task<PostDto> GetPostById(Guid Postid)
         {
             var response = await _httpClient.GetAsync($"{_baseUrl}/api/Post/{Postid}");
