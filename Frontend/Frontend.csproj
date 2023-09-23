@@ -6,9 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="Pages\PostCard.razor" />
-  </ItemGroup>
+ 
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
@@ -34,6 +32,9 @@
 
   <ItemGroup>
     <None Include="Pages\AddPost.razor" />
+    <None Include="Pages\Gallery.razor" />
   </ItemGroup>
+
+
 
 </Project>

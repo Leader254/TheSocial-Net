@@ -5,7 +5,8 @@
 @using Microsoft.AspNetCore.Authorization;
 @inject IPostInterface postInterface
 @inject NavigationManager navigationManager
-<div class="row">
+<div class="row card shadow-lg" style="width:90%; margin:2% 7%;">
+    <h4 class="text-black p-2">Create Post</h4>
    <EditForm Model="@Post" OnValidSubmit="PostAction">
             <DataAnnotationsValidator />
 
@@ -22,7 +23,7 @@
             </div>
             <div class="flex-row m-2 p-2">
                 <button type="submit" style="width:100px" class=" p-2 m-1 btn btn-primary">Submit</button>
-                <button type="button" style="width:100px" class="p-2 btn btn-secondary">Reset</button>
+                <button type="button" @onclick="DiscardPost" style="width:100px" class="p-2 btn btn-secondary">Discard</button>
             </div>
           
    </EditForm>
@@ -45,6 +46,10 @@
         {
             navigationManager.NavigateTo("");
         }
-       
+
+    }
+    public void DiscardPost()
+    {
+        navigationManager.NavigateTo("");
     }
 }
