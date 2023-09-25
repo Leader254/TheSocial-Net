@@ -10,6 +10,7 @@ namespace Frontend.Services.Interfaces
         //create comment
         Task<ResponseDto> CreateComment(CommentRequestDto commentRequestDto);
 
-        //get post comments
+        // Delete comments
+        Task<ResponseDto> DeleteCommentAsync(Guid id);
     }
 }

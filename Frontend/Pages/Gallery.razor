@@ -5,6 +5,7 @@
 @inject IPostInterface postInterface
 @inject NavigationManager navigate
 <div class="row">
+    <a href="/" class="btn btn-outline-info mx-5" style="width:10%;"> &#8592 Home Page</a>
     <button  class="btn btn-success mx-5" style="width:10%;" @onclick="AddPost">Creat new post</button>
         <div class="col-12 m-3" style="display:flex; justify-content:flex-start; align-content:center;">
             @foreach (var post in Posts)
@@ -14,7 +15,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@post.Title</h5>
                         <p class="card-text">@post.CreatedAt</p>
-                        <button href="" class="btn btn-primary">Edit</button>
+                    <button href="" class="btn btn-primary" @onclick="(()=>EditPost(post.postId))">Edit</button>
                     </div>
 
                 </div>
@@ -39,6 +40,10 @@
     public void AddPost()
     {
         navigate.NavigateTo("/CreatePost");
+    }
+    public void EditPost(Guid postId)
+    {
+        navigate.NavigateTo($"/editpost/{postId}");
     }
 
 

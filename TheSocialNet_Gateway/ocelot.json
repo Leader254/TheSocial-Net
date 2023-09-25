@@ -1,0 +1,71 @@
+﻿{
+  "Routes": [
+    //Posts
+    {
+      "DownstreamPathTemplate": "/api/Post",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7228
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Post",
+      "UpstreamHttpMethod": [ "Post", "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Post?id={id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7228
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Post?id={id}",
+      "UpstreamHttpMethod": [ "Delete", "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Post/{Postid}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7228
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Post/{Postid}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      //comments
+      "DownstreamPathTemplate": "/api/Comments",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7216
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Comments",
+      "UpstreamHttpMethod": [ "Post", "Get" ]
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/Comments/commentId?commentId={id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7216
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Comments/commentId?commentId={id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7050"
+  }
+}

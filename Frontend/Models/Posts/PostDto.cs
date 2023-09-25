@@ -5,7 +5,7 @@ namespace Frontend.Models.Posts
     public class PostDto
     {
 
-        public Guid PostId { get; set;
+        public Guid postId { get; set; }
         public Guid UserId { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Body { get; set; } = string.Empty;

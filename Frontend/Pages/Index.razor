@@ -41,7 +41,7 @@
     
    
 </div>
-@code {
+
 @code {
     private List<PostDto> Posts = new List<PostDto>();
     private bool isLoading = true;
@@ -72,10 +72,13 @@
     public async void DeletePost(Guid id)
     {
         await postInterface.DeletePostAsync(id);
-        navigationManager.NavigateTo("");
+        Posts = await postInterface.GetAllPostsAsync();
+        SelectedPost = null;
+        StateHasChanged();
+        
 
     }
-
+   
  
 
    
