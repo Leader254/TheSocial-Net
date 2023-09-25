@@ -1,0 +1,50 @@
+﻿@page "/myposts"
+@using Frontend.Models.Posts;
+@using Frontend.Services.Interfaces;
+@using Microsoft.AspNetCore.Components.Authorization;
+@inject IPostInterface postInterface
+@inject NavigationManager navigate
+<div class="row">
+    <a href="/" class="btn btn-outline-info mx-5" style="width:10%;"> &#8592 Home Page</a>
+    <button  class="btn btn-success mx-5" style="width:10%;" @onclick="AddPost">Creat new post</button>
+        <div class="col-12 m-3" style="display:flex; justify-content:flex-start; align-content:center;">
+            @foreach (var post in Posts)
+            {
+                <div class="card m-3 p-2 shadow-lg" style="height:300px; border-radius:15px;">
+                    <img src="@post.Body" class="card-img-top" alt="..." style="height:50%;">
+                    <div class="card-body">
+                        <h5 class="card-title">@post.Title</h5>
+                        <p class="card-text">@post.CreatedAt</p>
+                    <button href="" class="btn btn-primary" @onclick="(()=>EditPost(post.postId))">Edit</button>
+                    </div>
+
+                </div>
+            }
+
+        </div>   
+    
+</div>
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> _authState { get; set; }
+    public List<PostDto> Posts = new List<PostDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authState;
+        var userId = authState.User.FindFirst("sub")?.Value;
+        var AllPosts = await postInterface.GetAllPostsAsync();
+        Posts = AllPosts.Where(p => p.UserId == Guid.Parse(userId)).ToList();
+    }
+    public void AddPost()
+    {
+        navigate.NavigateTo("/CreatePost");
+    }
+    public void EditPost(Guid postId)
+    {
+        navigate.NavigateTo($"/editpost/{postId}");
+    }
+
+
+}

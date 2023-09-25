@@ -1,0 +1,81 @@
+﻿@using Frontend.Models.Comments;
+@inject IPostInterface postInterface
+@inject ICommentInterface commentInterface
+@inject IAuthInterface authInterface
+<div class="card m-5 p-2 shadow-lg" style="height:500px; width:90%; border-radius:15px;">
+    <img src="@postDto.Body" class="card-img-top" alt="..." style="height:50%;">
+    <div class="card-body">
+        <h5 class="card-title">@postDto.Title</h5>
+        <p class="card-text">@postDto.CreatedAt</p>
+        @foreach (var user in Users)
+        {
+            if (user.Id == postDto.UserId)
+            {
+                <p class="card-text" style="color:green">@user.name.ToLower()</p>
+            }
+        }
+
+        <button href="" class="btn btn-primary" @onclick="(()=>ViewPost(postDto))">View Post</button>
+        <button class="btn btn-primary" @onclick="@(()=>CommentAction(postDto.postId))">Comment</button>
+    </div>
+
+    <EditForm Model="@(GetCommentForPost(postDto.postId))">
+        <div class="form-group p-2">
+            <InputText type="text" class="form-control p-2" id="code" placeholder="Write a comment..." @bind-Value="@GetCommentForPost(postDto.postId).CommentText" aria-describedby="name" />
+            <ValidationMessage For="@(() => GetCommentForPost(postDto.postId).CommentText)" />
+        </div>
+    </EditForm>
+
+   
+</div>
+
+@code {
+    [Parameter]
+    public PostDto? postDto { get; set; }
+    [Parameter]
+    public EventCallback<PostDto> Viewpost { get; set; }
+    [Parameter]
+    public List<UserDto>? Users { get; set; }
+    private Dictionary<Guid, Comment> postComments = new Dictionary<Guid, Comment>();
+
+    //bind comment to post
+    private Comment GetCommentForPost(Guid postId)
+    {
+        if (!postComments.ContainsKey(postId))
+        {
+            // Initialize a new Comment object if it doesn't exist
+            postComments[postId] = new Comment();
+        }
+
+        return postComments[postId];
+    }
+    //view post
+    public async Task ViewPost(PostDto postDto)
+    {
+        await Viewpost.InvokeAsync(postDto);
+    }
+
+    //add comment
+    private async Task CommentAction(Guid id)
+    {
+
+        var comment = GetCommentForPost(id);
+        CommentRequestDto commentRequest = new CommentRequestDto()
+            {
+                CommentText = comment.CommentText,
+                PostId = id
+            };
+        if(!string.IsNullOrWhiteSpace(commentRequest.CommentText))
+        {
+            var res = await commentInterface.CreateComment(commentRequest);
+            if (res.Success)
+            {
+                comment.CommentText = "";
+            }
+        }
+       
+        commentRequest = new CommentRequestDto();
+
+
+    }
+}

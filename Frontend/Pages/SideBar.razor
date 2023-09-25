@@ -1,0 +1,56 @@
+﻿@inject NavigationManager navigationManager
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 200px; height:90vh;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+       
+        <span class="fs-4">@User</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="/" class="nav-link active" aria-current="page">
+                
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link link-body-emphasis">
+                
+                Account
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link link-body-emphasis">
+              
+                Feed
+            </a>
+        </li>
+        <li>
+            <a href="/myposts" class="nav-link link-body-emphasis">
+               
+                Gallery
+            </a>
+        </li>
+        <li>
+            <a href="/CreatePost" class="nav-link link-body-emphasis">
+
+                Create Post
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+@code {
+    public string User;
+    [CascadingParameter]
+    public Task<AuthenticationState> _authState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authState;
+        var username = authState.User.FindFirst("name")?.Value;
+        User = username;
+        Console.WriteLine(User);
+    }
+
+}

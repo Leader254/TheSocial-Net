@@ -9,7 +9,7 @@ namespace Frontend.Services
     public class CommentsService : ICommentInterface
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://localhost:7216";
+        private readonly string _baseUrl = "https://localhost:7050";
 
         public CommentsService(HttpClient httpClient)
         {
@@ -41,7 +41,18 @@ namespace Frontend.Services
             }
             return new List<Comment>();
         }
+        public async Task<ResponseDto> DeleteCommentAsync(Guid id)
+        {
+            var response = await _httpClient.DeleteAsync($"{_baseUrl}/api/Comments/commentId?commentId={id}");
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseDto>(content);
+            if (result.Success)
+            {
+                return result;
+            }
+            return new ResponseDto();
+        }
 
-      
+
     }
 }

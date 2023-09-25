@@ -1,0 +1,98 @@
+﻿@inject NavigationManager navigationManager
+@inject ICommentInterface commentInterface
+<div class="card p-3" style="height:90vh;">
+    <button type="button" class="btn btn-outline-success mb-2 w-25">Exit &#8592</button>
+    <img src="@postDto?.Body" class="card-img-top" alt="..." style="height:50%;">
+    <div class="card-body" style="display:flex; justify-content:space-between;">
+        <div>
+            <h5 class="card-title">@postDto?.Title</h5>
+            <p class="card-text"><small class="text-body-secondary">Last updated  @postDto?.CreatedAt</small></p>
+        </div>
+        <div>
+            @if(postDto.UserId == Guid.Parse(UserId))
+            {
+                <button type="button" class="btn btn-primary" @onclick="(()=>EditPost(postDto.postId))">Edit Post</button>
+                <button type="button" class="btn btn-danger" @onclick="Delete">Delete Post</button>
+            }
+            
+        </div>
+    </div>
+    <h5 class="mx-3"> Comments</h5>
+    <div style="height:40%; overflow-y:scroll;" class="p-3">
+        @if (postDto.Comments != null)
+        {
+         
+            @foreach (var comment in postDto.Comments)
+            {
+                <div class="card text-bg-primary shadow mb-3" style="width:100%;">
+                    @foreach (var user in Users)
+                    {
+                        if (user.Id == comment.UserId)
+                        {
+                            <div class="card-header"> @user.name</div>
+                        }
+                    }
+                    <div class="card-body" style="display:flex; justify-content:space-between;">
+                        <div>
+                            <p class="card-text">@comment.CommentText</p>
+                            <p class="card-text">@comment.CreatedOn</p>
+                        </div>
+                       
+                        <div>
+                            @if(comment.UserId == Guid.Parse(UserId))
+                            {
+                               
+                                <button type="button" class="btn btn-danger" @onclick="(()=>DeleteComment(comment.CommentId))">Delete</button>
+                            }
+                          
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>no comments yet!!</p>
+        }
+        
+    </div>
+
+
+</div>
+
+@code {
+    public string UserId;
+    [Parameter]
+    public PostDto? postDto { get; set; }
+    [Parameter]
+    public List<UserDto>? Users { get; set; }
+    [CascadingParameter]
+    public Task<AuthenticationState> _authState { get; set; }
+
+    [Parameter]
+    public EventCallback<Guid> DeletePost { get; set; }
+
+    public async Task Delete()
+    {
+        await DeletePost.InvokeAsync(postDto.postId);
+    }
+    public  void EditPost( Guid postId)
+    {
+        navigationManager.NavigateTo($"/editpost/{postId}");
+    }
+    public async Task DeleteComment(Guid id)
+    {
+        var res = await commentInterface.DeleteCommentAsync(id);
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authState;
+        var id = authState.User.FindFirst("sub")?.Value;
+        UserId = id;
+
+    }
+
+
+  
+}

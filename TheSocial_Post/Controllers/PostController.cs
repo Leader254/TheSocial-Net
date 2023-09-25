@@ -81,7 +81,7 @@ namespace TheSocial_Post.Controllers
             return BadRequest(_response);
         }
         // delete post and authorize the owner of the post
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Authorize]
         public async Task<ActionResult<ResponseDto>> DeletePost(Guid id)
         {
