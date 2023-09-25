@@ -1,6 +1,7 @@
-﻿
+﻿@inject NavigationManager navigationManager
+@inject ICommentInterface commentInterface
 <div class="card p-3" style="height:90vh;">
-    <button type="button" class="btn btn-outline-success mb-2">Exit &#8592</button>
+    <button type="button" class="btn btn-outline-success mb-2 w-25">Exit &#8592</button>
     <img src="@postDto?.Body" class="card-img-top" alt="..." style="height:50%;">
     <div class="card-body" style="display:flex; justify-content:space-between;">
         <div>
@@ -8,8 +9,12 @@
             <p class="card-text"><small class="text-body-secondary">Last updated  @postDto?.CreatedAt</small></p>
         </div>
         <div>
-            <button type="button" class="btn btn-primary" @onclick="(()=>EditPost(postDto))">Edit Post</button>
-            <button type="button" class="btn btn-danger" @onclick="Delete">Delete Post</button>
+            @if(postDto.UserId == Guid.Parse(UserId))
+            {
+                <button type="button" class="btn btn-primary" @onclick="(()=>EditPost(postDto.postId))">Edit Post</button>
+                <button type="button" class="btn btn-danger" @onclick="Delete">Delete Post</button>
+            }
+            
         </div>
     </div>
     <h5 class="mx-3"> Comments</h5>
@@ -34,8 +39,12 @@
                         </div>
                        
                         <div>
-                            <button type="button" class="btn btn-primary">Edit</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            @if(comment.UserId == Guid.Parse(UserId))
+                            {
+                               
+                                <button type="button" class="btn btn-danger" @onclick="(()=>DeleteComment(comment.CommentId))">Delete</button>
+                            }
+                          
                         </div>
                     </div>
                 </div>
@@ -52,12 +61,14 @@
 </div>
 
 @code {
+    public string UserId;
     [Parameter]
     public PostDto? postDto { get; set; }
     [Parameter]
     public List<UserDto>? Users { get; set; }
-    [Parameter]
-    public EventCallback<PostDto> UpdatePost { get; set; }
+    [CascadingParameter]
+    public Task<AuthenticationState> _authState { get; set; }
+
     [Parameter]
     public EventCallback<Guid> DeletePost { get; set; }
 
@@ -65,9 +76,23 @@
     {
         await DeletePost.InvokeAsync(postDto.postId);
     }
-    public async Task EditPost(PostDto postDto)
+    public  void EditPost( Guid postId)
     {
-        await UpdatePost.InvokeAsync(postDto);
-      
+        navigationManager.NavigateTo($"/editpost/{postId}");
     }
+    public async Task DeleteComment(Guid id)
+    {
+        var res = await commentInterface.DeleteCommentAsync(id);
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authState;
+        var id = authState.User.FindFirst("sub")?.Value;
+        UserId = id;
+
+    }
+
+
+  
 }

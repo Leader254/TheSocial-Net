@@ -65,11 +65,15 @@
                 CommentText = comment.CommentText,
                 PostId = id
             };
-        var res = await commentInterface.CreateComment(commentRequest);
-        if (res.Success)
+        if(!string.IsNullOrWhiteSpace(commentRequest.CommentText))
         {
-            comment.CommentText = "";
+            var res = await commentInterface.CreateComment(commentRequest);
+            if (res.Success)
+            {
+                comment.CommentText = "";
+            }
         }
+       
         commentRequest = new CommentRequestDto();
 
 

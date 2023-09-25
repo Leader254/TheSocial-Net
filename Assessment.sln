@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMessage_Bus", "TheMessag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frontend", "Frontend\Frontend.csproj", "{7F5827ED-E711-4CD7-8EC3-3BF8B9483E5E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{F9E1AD6F-DA9E-4E72-9EE6-DE58036D06AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheSocialNet_Gateway", "TheSocialNet_Gateway\TheSocialNet_Gateway.csproj", "{9007AACC-126C-42E6-9E91-AEF34E094C79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,9 +49,16 @@ Global
 		{7F5827ED-E711-4CD7-8EC3-3BF8B9483E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F5827ED-E711-4CD7-8EC3-3BF8B9483E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F5827ED-E711-4CD7-8EC3-3BF8B9483E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9007AACC-126C-42E6-9E91-AEF34E094C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9007AACC-126C-42E6-9E91-AEF34E094C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9007AACC-126C-42E6-9E91-AEF34E094C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9007AACC-126C-42E6-9E91-AEF34E094C79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9007AACC-126C-42E6-9E91-AEF34E094C79} = {F9E1AD6F-DA9E-4E72-9EE6-DE58036D06AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {392652AB-3B53-420F-9E42-CDE96B3FB94A}
