@@ -15,8 +15,10 @@
         }
 
         //logout
-        public void logout()
+        public async void logout()
         {
+            await localStorage.RemoveItemAsync("authToken");
+            await authProvider.GetAuthenticationStateAsync();
             NavigationManager.NavigateTo("/");
         }
     }

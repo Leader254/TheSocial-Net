@@ -6,26 +6,27 @@
 @using Microsoft.AspNetCore.Authorization;
 @inject IPostInterface postInterface
 @inject NavigationManager navigationManager
-<div class="row m-3 shadow-lg p-3" style="height: 80vh;">
-    <div class="col-6">
+<div class="container2 m-3 shadow-lg p-3 mx-auto w-75 d-flex align-items-center border border-dark rounded" style="height: 80vh;">
+    <div class="row">
+    <div class="col-md-6">
         @if (string.IsNullOrWhiteSpace(Post.Body))
         {
-            <img class="w-100 h-75" src="https://cdn.pixabay.com/photo/2016/12/21/00/36/woman-1921883_1280.jpg" />
+            <img class="w-100 h-100 d-none d-md-block" src="https://cdn.pixabay.com/photo/2016/12/21/00/36/woman-1921883_1280.jpg" />
         }
         else
         {
-            <img class="w-100 h-50" src="@Post.Body" />
+            <img class="w-100 h-100 d-none d-md-block" src="@Post.Body" />
         }
 
     </div>
-    <div class="col-6">
+    <div class="col-md-6">
         @if (string.IsNullOrWhiteSpace(Post.Title))
         {
-            <h4 class="text-black p-2">Create Post</h4>
+            <h2 class="text-black p-2">Create Post</h2>
         }
         else
         {
-            <h4 class="text-black p-2">Edit Post</h4>
+            <h2 class="text-black p-2">Edit Post</h2>
         }
 
         <EditForm Model="@Post" OnValidSubmit="PostAction">
@@ -58,7 +59,7 @@
 
         </EditForm>
     </div>
-  
+  </div>
 
 </div>
 

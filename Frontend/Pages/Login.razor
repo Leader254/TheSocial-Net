@@ -8,12 +8,12 @@
 @inject IAuthInterface authInterface
 @inject NavigationManager navigationManager
 @inject ILocalStorageService localStorageService
-<div class="d-flex justify-content-center">
-
-    <div class="col-4 align-self-center">
+<div class="m-3 shadow-lg p-3 mx-auto w-75 d-flex align-items-center border border-dark rounded">
+    <div class="row">
+        <div class="col-md-7 align-self-center">
         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
     </div>
-    <div class="col-4">
+    <div class="col-md-5">
         <h1> Login User</h1>
         <EditForm Model="@newUser" OnValidSubmit="loginUser">
             <DataAnnotationsValidator />
@@ -39,6 +39,7 @@
             </div>
         </EditForm>
 
+    </div>
     </div>
 </div>
 @code {
